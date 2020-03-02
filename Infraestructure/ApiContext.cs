@@ -10,21 +10,8 @@ namespace Api.Infraestructure
         public ApiContext(DbContextOptions<ApiContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder
-            .Entity<Alumno>(alumno =>
-            {
-                alumno.HasKey(a => a.Id);
-
-                alumno.HasOne<Curso>(a => a.Curso)
-                .WithMany(c => c.Alumnos);
-
-            });
-
-            modelBuilder
-            .Entity<Curso>(curso =>
-            {
-                curso.HasKey(c => c.Id);
-            });
+            AlumnoConfiguration.Config(modelBuilder);
+            CursoConfiguration.Config(modelBuilder);
         }
 
     }
